@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petroleum Product Management</title>
+    <link rel="icon" type="image/png" href="/favicon.png"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>    
+    <nav class="header">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">Oil Company</a>
+            </div>
+        </div>
+    </nav> 
+    <br><br><br>
+    <h1 style="text-align: center;">Get Details</h1>
+    <br> <br>
+<p><button id = "sort_button" onclick="sortTable()">Sort By Name</button></p>
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+    <table id="myTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th class="th-sm">Name
+            </th>
+            <th class="th-sm">Brand
+            </th>
+            <th class="th-sm">Status
+            </th>
+            <th class="th-sm">Quantity
+            </th>
+            <th class="th-sm">price
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Butane</td>
+            <td>HP</td>
+            <td>In Stock</td>
+            <td>100</td>
+            <td>6000$</td>
+          </tr>
+          <tr>
+            <td>Propane</td>
+            <td>Bharat</td>
+            <td>In Stock</td>
+            <td>500</td>
+            <td>3000$</td>
+          </tr>
+          <tr>
+            <td>Gasoline</td>
+            <td>Reliance</td>
+            <td>Out of Stock</td>
+            <td>325</td>
+            <td>6000$</td>
+          </tr>
+          <tr>
+            <td>Kerosene</td>
+            <td>HP</td>
+            <td>In Stock</td>
+            <td>800</td>
+            <td>10000$</td>
+          </tr>
+          <tr>
+            <td>Diesel</td>
+            <td>Reliance</td>
+            <td>Out of Stock</td>
+            <td>150</td>
+            <td>5000$</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+
+    <div class="footer" id="contact">
+        <h1 class="heading-black" style="color: white;">Contact</h1><br>
+        <div class="row footer-content">
+            <div class="col-md-6 text-left">
+                <p><b>Address:</b> Eureka Towers, Mindspace, W, Mumbai</p>
+                <p><b>Mobile:</b> +91 1234567890</p>
+                <p><b>Email:</b> monali.koshta@quantiphi.com</p>
+                <p><b>Website:</b> quantiphi.com</p>
+            </div>
+            <div class="col-md-6 text-right icons-container">
+                <a href="https://www.facebook.com" target="_blank"><img src="./img/fb.png" class="icon" alt="facebook icon" ></a> 
+                <a href="https://www.linkedin.com" target="_blank"> <img src="./img/linkedin.png" class="icon" alt="linked in icon"></a>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("myTable");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
+      //check if the two rows should switch place:
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+</html>
